@@ -1,4 +1,10 @@
 const User = require('../model/user');
+const Diwar = require('../model/diwar');
+const CIT = require('../model/deparrtment/cit');
+const COE = require('../model/deparrtment/coe');
+const COENG = require('../model/deparrtment/coeng');
+const COS = require('../model/deparrtment/cos');
+
 const jwt = require('jsonwebtoken');
 
 //handle errors
@@ -44,6 +50,11 @@ module.exports.login_get = (req,res) => {
     res.render('login', {title: 'Login'});
 }
 
+//diwar search
+module.exports.diwar_get = (req, res) => {
+
+}
+
 //register user to db
 module.exports.signup_post = async (req,res) => {
     const {
@@ -86,6 +97,75 @@ module.exports.login_post = async (req,res) => {
     }
     catch (err) {
         const errors = handleErrors(err)
+        res.status(400).json({errors});
+    }
+}
+
+//diwar save to db
+module.exports.diwar_post = async (req, res) => {
+    const {
+        email,
+        date,
+        time,
+        output,
+        details,
+        verify,
+        department
+    } = req.body;
+
+    try{
+        if (department === 'CIT'){
+            const cit = await CIT.create({
+                email,
+                date,
+                time,
+                output,
+                details,
+                verify,
+                department
+            })
+            console.log('TRY', cit)
+        }
+        if (department === 'COE'){
+            const coe = await COE.create({
+                email,
+                date,
+                time,
+                output,
+                details,
+                verify,
+                department
+            })
+            console.log('TRY', coe)
+        }
+        if (department === 'COENG'){
+            const coeng = await COENG.create({
+                email,
+                date,
+                time,
+                output,
+                details,
+                verify,
+                department
+            })
+            console.log('TRY', coeng)
+        }
+        if (department === 'COS'){
+            const cos = await COS.create({
+                email,
+                date,
+                time,
+                output,
+                details,
+                verify,
+                department
+            })
+            console.log('TRY', cos)
+        }
+           
+    }
+    catch (err){
+        const errors = handleErrors(err);
         res.status(400).json({errors});
     }
 }

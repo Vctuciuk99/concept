@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
-const citSchema = mongoose.Schema({
+const mongoose = require('mongoose');
+
+const diwarSchema = mongoose.Schema({
     email: {type: String, required: true},
     date: {type: String, required: true},
     time: {type: String, required: true},
@@ -8,7 +9,7 @@ const citSchema = mongoose.Schema({
     verify: {type: String, required: true},
     department: {type: String, required: true},
 },
-{collection: 'CIT'})
+{collection: 'DIWAR'})
 
-const model = mongoose.model('citSchema', citSchema)
-module.exports = model
+const model = mongoose.model('diwarSchema', diwarSchema);
+module.exports = model;

@@ -5,9 +5,9 @@
     <h1>THIS IS HOME</h1>
     
     <form>
-        <h2><%=user.department%></h2>
+        <input style="border: 0ch;" type="text" name="department" value="<%= user.department %>"/>
         <h2>Hi, <%= user.name %></h2>
-        <h4><%= user.email %></h4>
+        <input style="border: 0ch;" type="text" name="email" value="<%= user.email %>"/>
         <h3>Daily Individual Work Accomplishedment Report</h3>
         <label for="date">Date:</label>
         <input type="date" name="date" required/>
@@ -31,22 +31,21 @@
         <button>Submit</button>
     </form>
     <script>
-        const form = document.querySelector('form');
-
+        const form = document.querySelector('form')
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             //getthe values from the form
-            //const email = form.h4;
+            const email = form.email.value;
             const date = form.date.value;
             const time  = form.time.value;
             const output  = form.output.value;
             const details = form.details.value;
             const verify = form.verify.value;
-            //const department = form.h2;
+            const department = form.department.value;
 
            try{
-               const res = await fetch('/signup', {
+               const res = await fetch('/diwar', {
                    method:'POST',
                    body: JSON.stringify({
                        email,
@@ -67,6 +66,8 @@
                //redirect to main account
                if (data.user) {
                    //success
+                   alert('Submitted Successfully')
+                  
                }
            }
            catch (err) {

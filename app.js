@@ -16,7 +16,11 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 //database connection
-const dbURI ='mongodb+srv://vctuciuk:test12@cluster0.gsket.mongodb.net/DIWAR?retryWrites=true&w=majority';
+//connection ni von link below
+//const dbURI ='mongodb+srv://vctuciuk:test12@cluster0.gsket.mongodb.net/DIWAR?retryWrites=true&w=majority';
+
+//pag ka sa network ni franz link below
+const dbURI ='mongodb+srv://vctuciuk:test123456@try.jetwc.mongodb.net/TRY?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true  })
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
