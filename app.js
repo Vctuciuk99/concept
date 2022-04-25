@@ -1,0 +1,31 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const authRoute =  require('./routes/authRoute');
+const cookieParser = require('cookie-parser');
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+
+
+const app = express();
+
+//middleware
+app.use(express.static('public'));
+app.use(express.json());
+app.use(cookieParser());
+
+//view engone
+app.set('view engine', 'ejs');
+
+//database connection
+const dbURI ='mongodb+srv://vctuciuk:test12@cluster0.gsket.mongodb.net/DIWAR?retryWrites=true&w=majority';
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true  })
+    .then((result) => app.listen(3000))
+    .catch((err) => console.log(err));
+
+//routes
+app.get('*', checkUser);
+app.get('/', (req, res) => res.render('home', {title: 'Home'}));
+app.get('/account', requireAuth, (req, res) => res.render('account', {title: 'Home'}));
+app.use(authRoute);
+
+//if route not exist send 404 page
+app.use((req, res) => res.status(404).render('404', {title: '404'}));
